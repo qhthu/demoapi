@@ -13,23 +13,25 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1")
 public class DictionaryController {
 
-    @Autowired
-    private DictionaryRepository dictionaryRepository;
+    
+    ArrayList<dictionary> inventory = new ArrayList<dictionary>(
+            Arrays.asList(
+                    new dictionary(null, "","")
+            ));
 
-    @GetMapping("/dictionary")
-    public List<dictionary> getAll() {
-        return dictionaryRepository.findAll();
+    private dictionary find(Integer id) {
+
+        return inventory.stream()
+                .filter(i -> id.equals(i.getId()))
+                .findAny()
+                .orElse(null);
     }
 
-    @Test
-    public void testCreateUser() {
-        dictionary d = new dictionary();
-        d.setEn("hello");
-        d.setVi("xin chao");
-        dictionaryRepository.save(d);
+    @GetMapping("/items")
+    public ArrayList<dictionary> getInventory() {
 
+        return inventory;
     }
 }
