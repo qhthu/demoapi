@@ -14,6 +14,12 @@ public class dictionary {
     private Integer id;
     private String vi;
     private String en;
+    
+    public dictionary(Integer id, String vi, String en) {
+        this.id = id;
+        this.vi = vi;
+        this.en = en;
+    }
 
     public Integer getId() {
         return id;
